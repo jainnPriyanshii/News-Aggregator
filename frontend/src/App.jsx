@@ -10,7 +10,7 @@ import Carousel from "./Components/Carousel";
 import SignIn from "./Pages/Signin";
 import Signup from "./Pages/Signup";
 import { SearchProvider } from "./Contexts/SearchContext";
-
+import { DarkModeProvider } from "./Contexts/ThemeContext";
 
 
 
@@ -21,6 +21,7 @@ function App() {
   return (
   
     <BrowserRouter>
+    <DarkModeProvider>
      <SearchProvider>
        <Navbar/>
   
@@ -37,6 +38,7 @@ function App() {
       </Routes>
       <Footer/>
       </SearchProvider>
+      </DarkModeProvider>
     </BrowserRouter>
    
     

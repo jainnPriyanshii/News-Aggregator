@@ -19,6 +19,7 @@ import Switch from '@mui/material/Switch';
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button } from '@mui/material';
 import {useSearch } from '../Contexts/SearchContext';
+import { useTheme } from '../Contexts/ThemeContext';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -124,6 +125,7 @@ export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const { setSearchQuery } = useSearch();
+  const {darkMode ,toggledarkMode} = useTheme()
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
@@ -190,26 +192,8 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-        
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-          
-          </Badge>
-        </IconButton>
-      
-      </MenuItem>
+     
+     
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -301,7 +285,7 @@ export default function PrimarySearchAppBar() {
           </Box>
           
         
-          <MaterialUISwitch sx={{ m: 1 }} defaultChecked />
+          <MaterialUISwitch sx={{ m: 1 }} defaultChecked onClick={toggledarkMode}/>
 
           <Button
       variant="contained"
