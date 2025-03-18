@@ -125,7 +125,7 @@ export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const { setSearchQuery } = useSearch();
-  const {darkMode ,toggledarkMode} = useTheme()
+  // const {darkMode ,toggledarkMode} = useTheme()
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
@@ -285,7 +285,7 @@ export default function PrimarySearchAppBar() {
           </Box>
           
         
-          <MaterialUISwitch sx={{ m: 1 }} defaultChecked onClick={toggledarkMode}/>
+          <MaterialUISwitch sx={{ m: 1 }} defaultChecked/>
 
           <Button
       variant="contained"

@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 
 
 export const verifyToken = (req,res,next)=>{
+    console.log("Authorization Header:", req.headers.authorization);
     console.log("Verifying user details: ",req.params.id)
     const token = req.cookies.access_token;
 

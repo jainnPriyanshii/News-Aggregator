@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser'
 
 import favouriteRouter from './Routes/favourite.route.js'
 import userRouter from './Routes/user.route.js'
+import authRouter from './Routes/auth.route.js'
 const app = express();
 
 app.use(cookieParser());
@@ -21,7 +22,8 @@ mongoose.connect("mongodb+srv://priyanshijain664:jain2004@news.bm240.mongodb.net
             if (err) throw err;
             console.log("The server is running on port 3000")
         })
-
+         
+        app.use('/backend/auth',authRouter)
         app.use('/backend/user', userRouter)
         app.use('/backend/favourite', favouriteRouter)
         
