@@ -14,7 +14,7 @@ app.use(cookieParser());
 app.use(express.json())
 app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
 
-mongoose.connect("mongodb+srv://priyanshijain664:jain2004@news.bm240.mongodb.net/?retryWrites=true&w=majority&appName=News")
+mongoose.connect("")
     .then(() => {
         console.log("Connected to MongoDB!!");
         console.log("Starting the server now.")
