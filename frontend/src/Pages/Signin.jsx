@@ -1,49 +1,40 @@
 import * as React from 'react';
-import { AppProvider, SignInPage } from '@toolpad/core';
+import { AppProvider } from '@toolpad/core/AppProvider';
+import { SignInPage } from '@toolpad/core/SignInPage';
 import { useTheme } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+const providers = [{ id: 'credentials', name: 'Email and Password' }];
 
-const providers = [{name: 'Email and password' }];
 
-const NotificationsSignInPageError = () => {
-  const theme = useTheme();
-  const navigate = useNavigate();
-  const [errors, setErrors] = React.useState(null);
+const signIn = async (provider, formData) => {
+  
+  try {
+    const email = formData?.get('email')
+    const password = formData?.get('password')
 
-  const signIn = async (provider, formData) => {
-    try {
-      const email = formData?.get('email');
-      const password = formData?.get('password');
+     await axios.post('http://localhost:3000/backend/auth/signIn/', { email, password }, { withCredentials: true });
 
-      const response = await axios.post('http://localhost:3000/backend/auth/signin/', { email, password }, { withCredentials: true });
-
-      // Store user in localStorage
-      localStorage.setItem('user', JSON.stringify(response.data));
-
-      // Navigate to home page
-      navigate('/');
-
-      return { type: 'CredentialsSignin', error: null };
-    } catch (error) {
-      console.error("Signin error:", error);
+    window.location.href = '/'
+  } catch (error) {
+    console.error("Signin error:", error);
 
   
-      const errorMessage = error.response?.data?.message || 'An error occurred during sign in.';
+    const errorMessage = error.response?.data?.message || 'An error occurred during sign in.';
       setErrors(errorMessage);
-
-      return { type: 'CredentialsSignin', error: errorMessage };
-    }
-  };
-
-  return (
-    <AppProvider theme={theme}>
-      {errors && <p style={{ color: 'red', textAlign: 'center' }}>{errors}</p>}
-      <SignInPage signIn={signIn} providers={providers} />
-    </AppProvider>
-  );
+  }
 };
 
-export default NotificationsSignInPageError;
-
-
+export default function CredentialsSignInPage() {
+  const theme = useTheme();
+  return (
+    // preview-start
+    <AppProvider theme={theme}>
+      <SignInPage
+        signIn={signIn}
+        providers={providers}
+        slotProps={{ emailField: { autoFocus: false }, form: { noValidate: true } }}
+      />
+    </AppProvider>
+    // preview-end
+  );
+}

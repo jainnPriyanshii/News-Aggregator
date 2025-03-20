@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography, Box, Container, Link } from '@mui/material';
+import axios from 'axios'
 
 const Signup = () => {
   
@@ -32,15 +33,25 @@ const Signup = () => {
   };
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
-    if (validate()) {
-      console.log('Form Submitted Successfully', formValues);
-      
-    } else {
-      console.log('Validation Failed');
+    try {
+      const username = formValues.username
+      const email = formValues.email
+      const password = formValues.password
+  
+       await axios.post('http://localhost:3000/backend/auth/signup', {username, email, password }, { withCredentials: true });
+  
+      window.location.href = '/'
+    } catch (error) {
+      console.error("Signup error:", error);
+  
+    
+      const errorMessage = error.response?.data?.message || 'An error occurred during signup.';
+        setErrors(errorMessage);
     }
   };
+  
 
   return (
     <Container maxWidth="sm">

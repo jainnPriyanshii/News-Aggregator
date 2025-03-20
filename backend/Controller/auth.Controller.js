@@ -1,29 +1,62 @@
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import { errorHandler } from '../utils/error.js';
+import 'dotenv'
 
-export const signin = async (req, res) => {
+
+
+export const signUp = async(req,res,next) =>{
+
+    console.log(req.body);
+    const {username ,email,password} = req.body;
+    const hashedPassword = bcrypt.hashSync(password,10)
+    const user = new User({username,email,password:hashedPassword});
     try {
-        const { email, password } = req.body;
+        await user.save()
+        res.status(201).json({ message: "User registered successfully"});
+    } catch (error) {
+        next(error)
+    }
 
-        
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ message: "User already exists" });
+}
+
+export const signIn = async (req, res,next) => {
+    console.log(`Trying to signin with following details: $(req.body)`)
+    const {email,password } = req.body;
+
+    if(email&& password){
+        console.log(email,password)
+    }
+
+    try {
+        const validUser = await User.findOne({email})
+
+        if(!validUser){
+           next(errorHandler(404,"Not registered"))
+        } 
+        const validpassword = bcrypt.compareSync(password,validUser.password)
+        if(!validpassword){
+           next(errorHandler(401,"invalid password"))
         }
-
-        
-        const hashedPassword = await bcrypt.hash(password, 10);
-
+        console.log("User signined sucessfully")
+         const token = jwt.sign({id:validUser.id},process.env.JWT_SECRET)
+         console.log(token)
+         const { password: pass, ...rest } = validUser._doc;
+         res.cookie("accesstoken",token,{httpOnly:true}).status(200).json({message:"User signed in"})
        
-        const newUser = await User.create({
-            email, 
-            password: hashedPassword
-        });
-
-        res.status(201).json({ message: "User registered successfully", user: newUser });
     } catch (error) {
         console.error("Registration error:", error);
-        res.status(500).json({ message: "Error registering user", error });
+        next(errorHandler)
     }
 };
+
+
+export const signOut = async (req,res,next) => {
+    try {
+        res.clearCookie("access_token")
+        res.status(200).json({ message: "User logged out successfully"});
+    } catch (error) {
+        next(error)
+    }
+}

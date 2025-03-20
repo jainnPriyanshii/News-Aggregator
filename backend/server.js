@@ -1,15 +1,13 @@
 import express from "express"
 import mongoose from "mongoose"
 import cors from 'cors'
-import 'dotenv'
+import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
-
-
 import favouriteRouter from './Routes/favourite.route.js'
 import userRouter from './Routes/user.route.js'
 import authRouter from './Routes/auth.route.js'
 const app = express();
-
+dotenv.config();
 app.use(cookieParser());
 app.use(express.json())
 app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));

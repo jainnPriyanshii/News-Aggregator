@@ -290,11 +290,22 @@ export default function PrimarySearchAppBar() {
           <Button
       variant="contained"
       color="primary"
-      onClick={() => loginWithRedirect()}
+     
       href="/sign-in"
       
     >
       Log In
+    </Button>
+
+    <Button
+    sx={{marginLeft:3}}
+      variant="contained"
+      color="primary"
+    
+      href="/sign-up"
+      
+    >
+      Register
     </Button>
   
 
