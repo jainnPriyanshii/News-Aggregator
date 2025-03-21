@@ -201,8 +201,7 @@ const handleShare = () => {
 //         maxWidth: 345,
 //         margin: "10px",
 //         height: "100%",
-//         backgroundColor: theme.palette.background.paper, // ✅ Adapt background color
-//         color: theme.palette.text.primary, // ✅ Adapt text color
+      
 //       }}
 //     >
 //       <CardMedia
@@ -239,7 +238,7 @@ const handleShare = () => {
 //               href={article?.link}
 //               target="_blank"
 //               rel="noopener noreferrer"
-//               style={{ textDecoration: "none", color: theme.palette.primary.main }}
+             
 //             >
 //               Read more
 //             </a>

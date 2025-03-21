@@ -19,6 +19,7 @@ const HomePage = () => {
       setLoading(true);
       const response = await axios.get('https://newsdata.io/api/1/news?apikey=pub_560273712d33d2a388df314ffee7d0de9685e&q=top%20news');
       console.log("response:", response.data);
+      setData(response.data.results)
       
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -72,10 +73,10 @@ const HomePage = () => {
     {!loading && filteredData.map((value, index) => (
       <NewsCard key={index} article={value} />
     ))}
-  </div>
+  </div> 
   
   
-  {!loading && filteredData.length === 0 && searchquery && (
+   {!loading && filteredData.length === 0 && searchquery && (
     <div className="w-full text-center p-4">
       No articles found matching your search. Try different keywords.
     </div>
