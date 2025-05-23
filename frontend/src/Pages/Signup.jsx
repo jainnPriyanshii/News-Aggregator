@@ -40,7 +40,7 @@ const Signup = () => {
       const email = formValues.email
       const password = formValues.password
   
-       await axios.post('http://localhost:3000/backend/auth/signup', {username, email, password }, { withCredentials: true });
+       await axios.post('https://news-aggregator-seven-self.vercel.app/signup', {username, email, password }, { withCredentials: true });
   
       window.location.href = '/'
     } catch (error) {
