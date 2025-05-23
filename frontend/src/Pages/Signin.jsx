@@ -13,6 +13,7 @@ const signIn = async (provider, formData) => {
     const password = formData?.get('password')
     await axios.post('http://localhost:3000/backend/auth/signIn/', { email, password }, { withCredentials: true });
 
+
     window.location.href = '/'
   } catch (error) {
     console.error("Signin error:", error);
