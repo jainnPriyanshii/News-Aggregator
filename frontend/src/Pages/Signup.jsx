@@ -39,8 +39,7 @@ const Signup = () => {
       const username = formValues.username
       const email = formValues.email
       const password = formValues.password
-  
-       await axios.post('http://localhost:3000/backend/auth/signup', {username, email, password }, { withCredentials: true });
+     await axios.post('http://localhost:3000/backend/auth/signup', {username, email, password }, { withCredentials: true });
   
       window.location.href = '/'
     } catch (error) {

@@ -44,7 +44,7 @@ export default function RecipeReviewCard({ article }) {
     console.log("Article Description:", article?.description); 
     try {
         const response = await axios.post(
-            'http://localhost:3000/backend/favourite/', 
+          'http://localhost:3000/backend/favourite/', 
             { article: article.description },
             { headers: { 'Content-Type': 'application/json' } }  
         );
