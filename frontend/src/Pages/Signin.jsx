@@ -11,7 +11,7 @@ const signIn = async (provider, formData) => {
   try {
     const email = formData?.get('email')
     const password = formData?.get('password')
-    await axios.post('http://localhost:3000/backend/auth/signIn/', { email, password }, { withCredentials: true });
+    await axios.post(`${import.meta.env.VITE_API_URL}/backend/auth/signIn/`, { email, password }, { withCredentials: true });
 
 
     window.location.href = '/'

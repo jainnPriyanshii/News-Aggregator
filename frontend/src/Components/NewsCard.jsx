@@ -45,7 +45,7 @@ export default function RecipeReviewCard({ article }) {
     try {
         const response = await axios.post(
 
-          'http://localhost:3000/backend/favourite/', 
+          `${import.meta.env.VITE_API_URL}/backend/auth/favourite/`, 
 
             
 
