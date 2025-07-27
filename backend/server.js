@@ -13,8 +13,10 @@ app.use(express.json())
 app.use(cors({ credentials: true, origin: 'https://newsagg1.netlify.app' }));
 const port = process.env.PORT || 3000;
 
-mongoose.connect()
-    .then(() => {
+
+
+mongoose.connect(process.env.MONGO_URI,{})
+.then(() => {
         console.log("Connected to MongoDB!!");
         console.log("Starting the server now.")
         app.listen(3000, (err) => {
