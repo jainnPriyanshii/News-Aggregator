@@ -3,7 +3,7 @@
 [build]
   base    = "frontend"      # Change directory to 'frontend' before building
   command = "npm run build" # The build command
-  publish = "frontend/dist" # The folder to deploy (relative to the root)
+  publish = "dist" # The folder to deploy (relative to the root)
 
 [[redirects]]
   from = "/*"
