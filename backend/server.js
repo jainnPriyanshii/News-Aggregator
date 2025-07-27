@@ -10,15 +10,16 @@ const app = express();
 dotenv.config();
 app.use(cookieParser());
 app.use(express.json())
-app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
+app.use(cors({ credentials: true, origin: 'https://newsagg1.netlify.app' }));
+const port = process.env.PORT || 3000;
 
-mongoose.connect("")
+mongoose.connect()
     .then(() => {
         console.log("Connected to MongoDB!!");
         console.log("Starting the server now.")
         app.listen(3000, (err) => {
             if (err) throw err;
-            console.log("The server is running on port 3000")
+            console.log(`The server is running on port ${port}`)
         })
          
         app.use('/backend/auth',authRouter)
